@@ -58,6 +58,7 @@ export default {
     .ads__title {
       font-weight: 700;
       margin-bottom: 10px;
+      .textLimit;
     }
 
     .ads__contents {

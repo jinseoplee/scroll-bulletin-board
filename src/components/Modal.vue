@@ -40,6 +40,7 @@ export default {
 
   .modal__body {
     width: 50vw;
+    min-width: 300px;
     padding: 1em;
     position: absolute;
     top: 50%;

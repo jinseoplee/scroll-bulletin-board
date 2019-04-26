@@ -64,11 +64,11 @@ export default {
   },
   watch: {
     sortType() {
-      this.$store.commit(LIST.POST_LIST, []);
+      this.resetSearchContition();
       this.getPostList();
     },
     selectedFilter() {
-      this.$store.commit(LIST.POST_LIST, []);
+      this.resetSearchContition();
       this.getPostList();
     },
     bottom() {
@@ -78,6 +78,10 @@ export default {
   },
   methods: {
     ...mapActions(['getPostListAPI', 'getCategoryAPI']),
+    resetSearchContition() {
+      this.postPage = 1;
+      this.$store.commit(LIST.POST_LIST, []);
+    },
     /**
      * 게시글 & 광고 조회
      */
@@ -129,8 +133,14 @@ export default {
       this.bottom = this.isBottom();
     });
 
+    // 기존에 조회되었던 글 목록이 없다면 조회
     if (this.getLoadedPostList.length < 1) {
       this.init();
+    }
+
+    // 기존에 조회되었던 category가 있다면 세팅
+    if (Object.keys(this.getCategoryList).length > 0) {
+      this.selectedFilter = Object.keys(this.getCategoryList);
     }
   }
 };
